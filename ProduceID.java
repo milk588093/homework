@@ -1,7 +1,4 @@
 package com.company;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Random;
 
 public class ProduceID {
@@ -9,8 +6,7 @@ public class ProduceID {
         Random r = new Random();
         String ID = "";
         int first = (r.nextInt(26) + 10);
-        int gender, i;
-        int check = 0;
+        int gender, i,k;
         switch (first) {
             case 10:
                 ID = "A";
@@ -93,11 +89,25 @@ public class ProduceID {
         }
         gender = r.nextInt(2) + 1;
         ID = ID + Integer.toString(gender);
-        for (i = 0; i < 8; i++) {
+        int a=ID.charAt(0)-'A';
+        int b=(a / 10) + (9 * (a % 10));
+        int c=b+(gender*8);
+        for (i =1; i < 9; i++) {
             first = r.nextInt(10);
             ID = ID + first;
+            c=c+first*(8-i);
+//            System.out.println(first);
         }
+        c=c+Integer.parseInt(ID.substring(9,10));
+//        System.out.println(a);
+//        System.out.println(b);
+//        System.out.println(c);
         System.out.println(ID);
+        if(c%10==0){
+            System.out.println("正確");
+        }else {
+            System.out.println("錯誤ID");
+        }
     }
 }
 
